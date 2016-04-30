@@ -1,0 +1,235 @@
+<!doctype html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <meta name="viewport" content="initial-scale=1.0">
+        <title>DAP - Instrument Console</title>
+        <meta name="description" content="A suite of software tools to advance the understanding of the geometric structure inherent in the design and construction of classical string instruments.">
+        <meta name="keywords" content="String Instruments, Scheme, Amati, Project, Computational Art History">
+        <meta name="author" content="Harry Mairson">
+        <link rel="shortcut icon" href="images/favicon.png"/>
+        <!-- CSS -->
+
+        <!-- JS -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+        <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/codemirror.min.js'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/mode/scheme/scheme.min.js'></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-notify/0.2.0/js/bootstrap-notify.js'></script>
+        <script src='http://www.digitalamati.org/js/FileSaver.min.js'></script>
+        <!-- Robots -->
+        <meta name="robots" content="index, follow">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/codemirror.min.css">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0-rc.1/themes/smoothness/jquery-ui.css">
+        <link rel="stylesheet" href="../layouts/console.css">
+    </head>
+    <body>
+        <div class="container-fluid dap-console-main-modal">
+            <div class="row dap-console-row">
+
+                            <a id="snap-out" href="#" style="z-index:10;top:10px;left:-30px;" class="glyphicon glyphicon glyphicon-eye-close"></a>
+                <div class="col-md-6 dap-console-left-section">
+                
+                    <textarea class="dap-console-code" id="code">
+(require AmatiML)
+
+(elaboration #t)
+(mirroring #t)
+(arcthickness 1)
+(arccolor "blue")
+(edge-tracing #t violin-overhang)
+
+(coded-by "Harry Mairson")
+(title "Violin by Andrea Amati (const. François Denis)")
+
+; Violin by Andrea Amati
+
+(define (Amati)
+
+; LAYOUT OF THE AREA FRAMEWORK on which the curves are drawn...
+
+(let* ((xq 208) ;; 208mm in the Amati
+(X (label "X" origin))
+(A (label "A" (xshift X (- (/ xq 2)))))
+(Q (label "Q" (yshift X xq)))
+(N (label "N" (pointfrom X Q (/ 1 4))))
+(q (label "q" (xshift (at A Q) (/ (distance X N) 2))))
+(qp (label "q'" (mirror q)))
+(O (label "O" (yshift Q (- (* (distance X N) (/ 5 4))))))
+(Z (label "Z" (yshift N (* (distance X N) (/ 2 3)))))
+(P (label "P" (yshift X (- (* (distance X N) (/ 8 3))))))
+(p (label "p" (xshift (at A P) (/ (distance X N) 8))))
+(pp (label "p'" (mirror p)))
+(M (label "M" (pointfrom X P (/ 1 2))))
+(a (label "a" (xshift A (/ (distance X Z) 2))))
+(b (label "b" (xshift Z (- (/ (distance A a) 2)))))
+(e (label "e" (xshift (at b N) (- (* (xdistance b p) (/ 3 8))))))
+(c (label "c" (xshift (at p X) (/ (xdistance e p) 4))))
+(d (label "d" (xshift (at p X) (/ (xdistance e p) 2))))
+(h (label "h" (xshift (at e Z) (- (/ (xdistance e p) 4)))))
+(g (label "g" (xshift (at e Z) (- (/ (xdistance e p) 2)))))
+
+; ***** DRAWING THE OUTLINE *****
+
+; THE LOWER BOUTS...
+
+(R1lower (circlefrom Z P))
+(R2lower (lower-left-flank (vertical p) R1lower (distance M P)))
+(R3lower (left-flush R2lower (distance X Z)))
+(R4lower (lower-corner R3lower (/ (distance X N) 2) c))
+(lower-curve (make-curve P c (list R1lower R2lower R3lower R4lower)))
+
+; THE UPPER BOUTS...
+
+(R1upper (circlefrom N Q))
+(R2upper (upper-left-flank (vertical q) R1upper (distance O Q)))
+(R3upper (upper-corner R2upper (/ (distance X N) 2) g))
+(upper-curve (make-curve Q g (list R1upper R2upper R3upper)))
+
+; THE MIDDLE BOUTS...
+
+(R1middle (circlefrom (xshift e (- (distance X Z))) e))
+(R2middle (middle-top-corner R1middle (/ (distance N Z) 2) h))
+(R3middle (middle-bottom-corner R1middle (/ (distance X N) 2) d))
+(middle-curve (make-curve g c (list R2middle R1middle R3middle))))
+
+(list X A Q N q qp O Z P p pp M a b e c d h g 
+(horizontal N) (horizontal O) (horizontal Z)
+(horizontal P) (horizontal Q) (horizontal X) (horizontal M)
+(vertical p) (vertical q) (vertical b) (vertical e) 
+
+(line p (mirror q))
+
+R1lower R2lower R3lower R4lower 
+R1upper R2upper R3upper 
+R1middle R2middle R3middle 
+lower-curve middle-curve upper-curve)
+))
+
+(sketch (Amati))
+
+(end-drawing)
+
+                    </textarea>
+                
+                
+                
+                
+                
+                
+                
+                
+                </div>
+                <div id="output" class="col-md-6 dap-console-right-section">
+                    
+                    Loading...
+                
+                </div>
+            </div>
+        </div>
+        <script>
+var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+    lineNumbers: true,
+    lineWrapping:true,
+    scrollbarStyle:null,
+    onChange: function(){console.log("hello");}
+});
+
+// Create the XHR object.
+function createCORSRequest(method, url) {
+  var xhr = new XMLHttpRequest();
+  if ("withCredentials" in xhr) {
+    // XHR for Chrome/Firefox/Opera/Safari.
+    xhr.open(method, url, true);
+  } else if (typeof XDomainRequest != "undefined") {
+    // XDomainRequest for IE.
+    xhr = new XDomainRequest();
+    xhr.open(method, url);
+  } else {
+    // CORS not supported.
+    xhr = null;
+  }
+  return xhr;
+}
+
+// Make the actual CORS request.
+function makeCorsRequest() {
+  // All HTML5 Rocks properties support CORS.
+ var url = 'http://api.digitalamati.org/';
+ // var url = 'http://localhost:8080/';
+
+  var xhr = createCORSRequest('POST', url);
+  if (!xhr) {
+    alert('CORS not supported');
+    return;
+  }
+
+  // Response handlers.
+  xhr.onload = function() {
+    var response = JSON.parse(xhr.responseText);
+    //var svg = response.svg.substring(response.svg.indexOf("<"));
+    var svg = response.svg;
+    var error_log = response.errors;
+    console.log(error_log);
+    if (error_log.length > 0){
+
+        $.notify({
+            // options
+            message: error_log
+        },{
+            // settings
+            type: 'danger'
+        });
+    }
+    $('#output').html(svg);
+    $('#output').html($('#output > svg'))
+    $('#output').fadeTo("fast",1);
+    //alert('Response from CORS request to ' + url + ': ' + text);
+  };
+
+  xhr.onerror = function() {
+    $('#output').html("Error occured. Trying again...");
+  };
+
+  xhr.send(editor.getValue());
+}
+makeCorsRequest();
+
+var timeout;
+editor.on('change',function(){
+    $('#output').fadeTo("fast",0.5);
+    clearTimeout(timeout);
+    timeout = setTimeout(function(){ 
+        makeCorsRequest();
+    }, 1000);
+});
+
+var isFull = false;
+$("#snap-out").click(function(){
+    
+    $( ".dap-console-left-section" ).toggle();
+    if (isFull == true){
+        isFull = false;
+        $( ".dap-console-right-section" ).css({"width":"50%"});
+    } else {
+        isFull = true;
+
+        $( ".dap-console-right-section" ).css({"width":"95%"});
+    }
+});
+
+$(function() {
+  });
+
+$("#download").click(function(){
+    var blob = new Blob(["Created on THE DIGITAL AMATI PROJECT. All rights reserved. www.digitalamati.org", $("#output").html(), "<br>Created on the Digital Amati Project."], {type: "text/plain;charset=utf-8"});
+    saveAs(blob, "instrument.html");
+
+});
+
+        </script>
+    </body>
+</html>

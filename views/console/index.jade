@@ -1,0 +1,10 @@
+extends ../../layouts/default
+
+block head
+  title About UAAs
+
+block neck
+  link(rel='stylesheet', href='/views/about/index.min.css?#{cacheBreaker}')
+
+block body
+    include ./console.html

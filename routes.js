@@ -143,6 +143,11 @@ exports = module.exports = function(app, passport) {
   app.all('/account*', ensureAccount);
   app.get('/account/', require('./views/account/index').init);
 
+  //console
+  app.all('/console*', ensureAuthenticated);
+  app.all('/console*', ensureAccount);
+  app.get('/console/', require('./views/console/index').init);
+
   //account > verification
   app.get('/account/verification/', require('./views/account/verification/index').init);
   app.post('/account/verification/', require('./views/account/verification/index').resendVerification);

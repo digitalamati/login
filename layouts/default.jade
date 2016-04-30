@@ -20,9 +20,11 @@ html
         div.navbar-collapse.my-navbar-collapse.collapse
           ul.nav.navbar-nav
             li: a(href='/') Home
+            li: a(href='/console/') Console
+            li: a(href='http://www.digitalamati.org') Overview
             li: a(href='/about/') About
             li: a(href='/signup/') Sign Up
-            li: a(href='/contact/') Contact
+            li: a(href='/contact/') Support
           ul.nav.navbar-nav.navbar-right
             if user && user.username
               li: a(href='#{user.defaultReturnUrl}')
@@ -32,6 +34,7 @@ html
               li: a(href='/login/')
                 i.fa.fa-user
                 |  Sign In
+              li: a(href='/signup/') Sign Up
 
     div.page
       div.container
