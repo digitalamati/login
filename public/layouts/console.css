@@ -8,6 +8,14 @@ body {
         border-color: black;
 }
 
+.dap-console-main-modal {
+        padding: 0px;
+}
+
+.page .container {
+        width: 100%;
+}
+
 .CodeMirror {
 	background-color: #e5e1d8;
 
