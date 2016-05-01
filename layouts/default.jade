@@ -11,7 +11,6 @@ html
       div.container
         div.navbar-header
           a.navbar-brand(href='/')
-            img.navbar-logo(src='/media/logo-symbol-64x64.png', alt='Logo')
             span.navbar-brand-label #{projectName}
           button.navbar-toggle.collapsed(data-toggle='collapse', data-target='.my-navbar-collapse')
             span.icon-bar
@@ -21,10 +20,8 @@ html
           ul.nav.navbar-nav
             li: a(href='/') Home
             li: a(href='/console/') Console
-            li: a(href='http://www.digitalamati.org') Overview
-            li: a(href='/about/') About
-            li: a(href='/signup/') Sign Up
             li: a(href='/contact/') Support
+            li: a(href='http://www.github.com/digitalamati') Github
           ul.nav.navbar-nav.navbar-right
             if user && user.username
               li: a(href='#{user.defaultReturnUrl}')

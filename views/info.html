@@ -1,0 +1,245 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
+        <link rel="stylesheet" href="/layouts/index.css">
+
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+
+                <div class="panel panel-default">
+                    <div class="panel-content panel-heading">About this project</div>
+                    <div class="panel-body panel-content">
+                        Andrea Amati (1505-1577), who lived in Cremona, made the world’s first violin. In homage to him, the <tt>Digital Amati</tt> project seeks to advance our understanding of fundamental geometric structures in the design of classical string instruments. Like classical architecture, the design of these instruments is founded on geometric principles. We can bring to light computational aspects of that artistic history, using a new programming language vernacular that describes traditional methods of design.
+
+                        <p> We explain seventeenth-century knowledge of these artistic and inherently computational structures in software, using a <i>domain-specific programming language.</i></p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+
+                <img class="logo" src="media/logo-svg.svg" alt="Digital Amati Project Logo">
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="panel panel-default">
+                    <div class="panel-content panel-heading"><a class="glyphicon glyphicon-chevron-right faq-expand"></a> AmatiML: the geometry engine </div>
+                    <div class="panel-content panel-body faq-content" hidden>
+                        <p>
+                        AmatiML is the name we've chosen for our domain specific markup language, designed to serve as an investigative tool to understand more about the history and evolution of instrument design, an inquiry we like to call “computational art history”.  It's an extension of the Scheme programming language with programmable straightedge and compass constructions, and graphical procedures relevant to designing outlines.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+</section>
+
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="panel panel-default">
+                    <div class="panel-content panel-heading"> <a class="glyphicon glyphicon-chevron-right faq-expand"></a>Computational thinking about art </div>
+                    <div class="panel-content panel-body faq-content" hidden>
+                        <p>Digital technology and software methods provide lucid, coherent tools
+                        for facilitating and enhancing the understanding inherent in this historical design tradition.
+                        tradition.  They render that knowledge accessible, repeatable, and
+                        flexible, allowing rapid experimentation and communication.
+                        Algorithms encode methods, including those that are ubiquitious in
+                        lutherie.  Programming languages don't exist simply to tell machines
+                        what to do.  Well recognized as the engineering vernacular of
+                        software, they are more importantly the collective mother tongue of
+                        algorithmic ideas.  <i>Computational thinking</i>
+                        is an accepted way of understanding complex, constructional processes;
+                        programming languages---a form of writing---provide a medium for us to
+                        express <i>to each other</i> what we know how to do. 
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+</section>
+
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="panel panel-default">
+                    <div class="panel-content panel-heading"><a class="glyphicon glyphicon-chevron-right faq-expand"></a>What does this ``geometry engine'' language look like?  How do 
+                        you say things in it? </div>
+                    <div class="panel-content panel-body faq-content" hidden>
+                        <p>
+                        Here is a simple geometric problem: given points <i>p,q,r</i> in the plane
+                        that are not collinear, what is the unique circle where the points lie
+                        on the circumference of the circle?
+
+                        The "analytic geometry"way of solving this problem is to plug the
+                        three points into that equation, and you get three 
+                        equations in three unknowns.  Solve this set of equations, and you get
+                        the equation for the circle.
+
+                        The "Euclidean geometry""'' way of solving this problem is to draw,
+                        with a straightedge and compass, the line <i>pq</i> bisecting <i>p</i> and <i>q</i>,
+                        where every point on <i>pq</i> is equidistant from <i>p</i> and <i>q</i>; similarly,
+                        draw the bisecting line <i>qr</i> of points equidistant from <i>q</i> and <i>r</i>.
+                        (See the picture below.)  Because <i>p,q,r</i> are not collinear (all on a
+                        straight line), the lines <i>pq</i> and <i>qr</i> intersect---at a point <i>c</i>
+                        equidistant from <i>p,q,r</i>.  That's the center of the circle.  The
+                        radius is the distance from <i>c</i> to <i>p</i>.  There's no <i>
+                            calculating</i>---only <i>drawing</i>.
+                        <p></p>
+                        And that's what the code says, in so many words:  let <tt>pq</tt> be the
+                        bisector of <tt>p</tt> and <tt>q</tt>, similarly <tt>qr</tt> the bisector of
+                        <tt>q</tt> and <tt>r</tt>.  Let <tt>c</tt> be the intersection of lines 
+                        <tt>pq</tt> and <tt>qr</tt>; the circle is one with center <tt>c</tt>, and radius
+                        distance from <tt>c</tt> to <tt>p</tt>.
+                        <p></p>
+                        There's no numerical calculating by the user at the ``front end'', only geometric
+                        description---writing down what you would do with a straightedge and
+                        compass.  When the code is run, the ``back end'' numerical
+                        calculations are done automagically by the geometry engine.  This is
+                        not deep mathematics, by any means, but in hiding calculation, it lets
+                        Euclidean specification drive Cartesian computation.  We call this
+                        ``geometric programming'', because you write down with code what you
+                        visualize doing with a straightedge and compass.
+                        </p>
+                        <img src="media/Circle.jpg">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+</section>
+
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="panel panel-default">
+                    <div class="panel-content panel-heading"><a class="glyphicon glyphicon-chevron-right faq-expand"></a>What does this have to do with instrument design? </div>
+                    <div class="panel-content panel-body faq-content" hidden>
+                        <p>
+                        A suite of straightedge
+                        and compass constructions are what are used to design instrument forms
+                        based on geometric principles.  An instrument outline is composed of
+                        an ensemble of circular arcs and straight edges, composed together
+                        in a precise arrangement.
+                        <p></p>
+                        Here's an example: given the <i>green line</i> below (defining the
+                        width of the lower bout [third] of an instrument outline---see the
+                        instrument drawing in the lower right, below), and a 
+                        <i>blue circle</i> defining the lowest curve of the outline, fit a 
+                        <i>red circle</i> of a fixed radius <tt>r</tt> to be tangent to the green
+                        line and blue circle.  The red circle defines the lower left flank of
+                        the instrument outline---see the drawing in the lower right of the
+                        figure below.  The whole problem then reduces to the following: 
+                        <i>where is the center of the red circle located?</i>
+                        <p></p>
+                        The vertical yellow line defines where the center of the red circle
+                        has to be, if the red circle is tangent to the green line on the
+                        right: <tt>(vertical (xshift (point-on L) r))</tt>.  Namely: take a point
+                        on the green line <tt>L</tt>, shift it over by the red radius <tt>r</tt>,
+                        and draw the vertical line through that shifted point.
+                        <p></p>
+                        The yellow circle defines where the center of the red circle has to
+                        be, if the red circle is tangent to the interior of the blue circle:
+                        <tt>(circle (center C) (- R r))</tt>.  Namely: the circle with the same
+                        center as the blue one, only with a radius of <tt>R-r</tt>.
+                        <p></p>
+                        Now, <tt>intersect</tt> the yellow line and the yellow circle: the intersections
+                        are marked below by two red dots.  The lower, <tt>bottom</tt> one is the solution---the
+                        center of the red circle.
+
+                        </p><img src="media/Bout.pdf">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+</section>
+
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="panel panel-default">
+                    <div class="panel-content panel-heading"> <a class="glyphicon glyphicon-chevron-right faq-expand"></a>What does the code for an instrument outline look like?  What do you get when the code is run? </div>
+                    <div class="panel-content panel-body faq-content" hidden>
+                        <p>
+                        Here is
+                        the first of seven canonical models described in Francois Denis's
+                        book (<b>Traite de Lutherie: The Violin and the Art of Measurement</b>, pp. 114--129), a violin by Andrea Amati.  The geometry engine
+                        outputs full-scale PDF of the instrument outline.  This drawing can be
+                        modified and elaborated in various ways.  The additional arcs and
+                        lines elaborate the straightedge and compass constructions that are
+                        used to assemble, as an ensemble, the instrument outline.
+                        </p><img src="media/Amativiolin.png">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+</section>
+
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="panel panel-default">
+                    <div class="panel-content panel-heading"> <a class="glyphicon glyphicon-chevron-right faq-expand"></a>How are drawings used to build instrument forms? </div>
+                    <div class="panel-content panel-body faq-content" hidden>
+                        <p>
+                        Internal forms for the Stradivari <i>Cristiani</i> violoncello, made
+                        for a reduced-size instrument that is 740mm long, with bout widths
+                        commensurate with a classic Stradivari <i>forma B</i> instrument.  The
+                        first was made from a full-size drawing, and cut out on a band saw.
+                        The second (made in a lot of 40 at the Oberlin Violin Workshop in
+                        summer 2015) was made using the PDF of the drawing to drive a CNC
+                        router.
+                        </p>
+                        <p></p>
+                        Here is an internal form made direct from PDF for the drawing: <br><img class="small-img" src="media/homemade.JPG">
+                        <p></p>
+                        Here is an internal form made by a CNC router for the drawing: <br><img class="small-img" src="media/CNC.JPG">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+</section>
+
+<footer>
+    <div class="container-fluid">
+    </div>
+</footer>
+
+</div>
+<script>
+
+$(".faq-expand").click(function(){
+        $(this).parent().parent().find(".faq-content").toggle();
+        $(this).toggleClass("glyphicon-chevron-right");
+        $(this).toggleClass("glyphicon-chevron-down");
+
+});
+</script>
+
+
