@@ -6,7 +6,7 @@ exports.mongodb = {
 };
 exports.companyName = 'The Digital Amati Project';
 exports.projectName = 'Digital Amati';
-exports.systemEmail = 'edenzik@gmail.com';
+exports.systemEmail = 'mairson@brandeis.edu';
 exports.cryptoKey = 'k3yb0ardc4t';
 exports.loginAttempts = {
   forIp: 50,
