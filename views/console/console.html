@@ -16,9 +16,10 @@
         <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
         <script src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/codemirror.min.js'></script>
         <script src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/mode/scheme/scheme.min.js'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/edit/matchbrackets.min.js'></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
         <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-notify/0.2.0/js/bootstrap-notify.js'></script>
-        <script src='http://www.digitalamati.org/js/FileSaver.min.js'></script>
+        <script src='http://old.digitalamati.org/js/FileSaver.min.js'></script>
         <!-- Robots -->
         <meta name="robots" content="index, follow">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -30,7 +31,6 @@
         <div class="container-fluid dap-console-main-modal">
             <div class="row dap-console-row">
 
-                            <a id="snap-out" href="#" style="z-index:10;top:10px;left:-30px;" class="glyphicon glyphicon glyphicon-eye-close"></a>
                 <div class="col-md-6 dap-console-left-section">
                 
                     <textarea class="dap-console-code" id="code">
@@ -49,70 +49,69 @@
 
 (define (Amati)
 
-; LAYOUT OF THE AREA FRAMEWORK on which the curves are drawn...
+  ; LAYOUT OF THE AREA FRAMEWORK on which the curves are drawn...
 
-(let* ((xq 208) ;; 208mm in the Amati
-(X (label "X" origin))
-(A (label "A" (xshift X (- (/ xq 2)))))
-(Q (label "Q" (yshift X xq)))
-(N (label "N" (pointfrom X Q (/ 1 4))))
-(q (label "q" (xshift (at A Q) (/ (distance X N) 2))))
-(qp (label "q'" (mirror q)))
-(O (label "O" (yshift Q (- (* (distance X N) (/ 5 4))))))
-(Z (label "Z" (yshift N (* (distance X N) (/ 2 3)))))
-(P (label "P" (yshift X (- (* (distance X N) (/ 8 3))))))
-(p (label "p" (xshift (at A P) (/ (distance X N) 8))))
-(pp (label "p'" (mirror p)))
-(M (label "M" (pointfrom X P (/ 1 2))))
-(a (label "a" (xshift A (/ (distance X Z) 2))))
-(b (label "b" (xshift Z (- (/ (distance A a) 2)))))
-(e (label "e" (xshift (at b N) (- (* (xdistance b p) (/ 3 8))))))
-(c (label "c" (xshift (at p X) (/ (xdistance e p) 4))))
-(d (label "d" (xshift (at p X) (/ (xdistance e p) 2))))
-(h (label "h" (xshift (at e Z) (- (/ (xdistance e p) 4)))))
-(g (label "g" (xshift (at e Z) (- (/ (xdistance e p) 2)))))
+  (let* ((xq 208) ;; 208mm in the Amati
+         (X (label "X" origin))
+         (A (label "A" (xshift X (- (/ xq 2)))))
+         (Q (label "Q" (yshift X xq)))
+         (N (label "N" (pointfrom X Q (/ 1 4))))
+         (q (label "q" (xshift (at A Q) (/ (distance X N) 2))))
+         (qp (label "q'" (mirror q)))
+         (O (label "O" (yshift Q (- (* (distance X N) (/ 5 4))))))
+         (Z (label "Z" (yshift N (* (distance X N) (/ 2 3)))))
+         (P (label "P" (yshift X (- (* (distance X N) (/ 8 3))))))
+         (p (label "p" (xshift (at A P) (/ (distance X N) 8))))
+         (pp (label "p'" (mirror p)))
+         (M (label "M" (pointfrom X P (/ 1 2))))
+         (a (label "a" (xshift A (/ (distance X Z) 2))))
+         (b (label "b" (xshift Z (- (/ (distance A a) 2)))))
+         (e (label "e" (xshift (at b N) (- (* (xdistance b p) (/ 3 8))))))
+         (c (label "c" (xshift (at p X) (/ (xdistance e p) 4))))
+         (d (label "d" (xshift (at p X) (/ (xdistance e p) 2))))
+         (h (label "h" (xshift (at e Z) (- (/ (xdistance e p) 4)))))
+         (g (label "g" (xshift (at e Z) (- (/ (xdistance e p) 2)))))
 
-; ***** DRAWING THE OUTLINE *****
+         ; ***** DRAWING THE OUTLINE *****
 
-; THE LOWER BOUTS...
+         ; THE LOWER BOUTS...
 
-(R1lower (circlefrom Z P))
-(R2lower (lower-left-flank (vertical p) R1lower (distance M P)))
-(R3lower (left-flush R2lower (distance X Z)))
-(R4lower (lower-corner R3lower (/ (distance X N) 2) c))
-(lower-curve (make-curve P c (list R1lower R2lower R3lower R4lower)))
+         (R1lower (circlefrom Z P))
+         (R2lower (lower-left-flank (vertical p) R1lower (distance M P)))
+         (R3lower (left-flush R2lower (distance X Z)))
+         (R4lower (lower-corner R3lower (/ (distance X N) 2) c))
+         (lower-curve (make-curve P c (list R1lower R2lower R3lower R4lower)))
 
-; THE UPPER BOUTS...
+         ; THE UPPER BOUTS...
 
-(R1upper (circlefrom N Q))
-(R2upper (upper-left-flank (vertical q) R1upper (distance O Q)))
-(R3upper (upper-corner R2upper (/ (distance X N) 2) g))
-(upper-curve (make-curve Q g (list R1upper R2upper R3upper)))
+         (R1upper (circlefrom N Q))
+         (R2upper (upper-left-flank (vertical q) R1upper (distance O Q)))
+         (R3upper (upper-corner R2upper (/ (distance X N) 2) g))
+         (upper-curve (make-curve Q g (list R1upper R2upper R3upper)))
 
-; THE MIDDLE BOUTS...
+         ; THE MIDDLE BOUTS...
 
-(R1middle (circlefrom (xshift e (- (distance X Z))) e))
-(R2middle (middle-top-corner R1middle (/ (distance N Z) 2) h))
-(R3middle (middle-bottom-corner R1middle (/ (distance X N) 2) d))
-(middle-curve (make-curve g c (list R2middle R1middle R3middle))))
+         (R1middle (circlefrom (xshift e (- (distance X Z))) e))
+         (R2middle (middle-top-corner R1middle (/ (distance N Z) 2) h))
+         (R3middle (middle-bottom-corner R1middle (/ (distance X N) 2) d))
+         (middle-curve (make-curve g c (list R2middle R1middle R3middle))))
 
-(list X A Q N q qp O Z P p pp M a b e c d h g 
-(horizontal N) (horizontal O) (horizontal Z)
-(horizontal P) (horizontal Q) (horizontal X) (horizontal M)
-(vertical p) (vertical q) (vertical b) (vertical e) 
+    (list X A Q N q qp O Z P p pp M a b e c d h g 
+          (horizontal N) (horizontal O) (horizontal Z)
+          (horizontal P) (horizontal Q) (horizontal X) (horizontal M)
+          (vertical p) (vertical q) (vertical b) (vertical e) 
 
-(line p (mirror q))
+          (line p (mirror q))
 
-R1lower R2lower R3lower R4lower 
-R1upper R2upper R3upper 
-R1middle R2middle R3middle 
-lower-curve middle-curve upper-curve)
-))
+          R1lower R2lower R3lower R4lower 
+          R1upper R2upper R3upper 
+          R1middle R2middle R3middle 
+          lower-curve middle-curve upper-curve)
+    ))
 
 (sketch (Amati))
 
 (end-drawing)
-
                     </textarea>
                 
                 
@@ -130,11 +129,38 @@ lower-curve middle-curve upper-curve)
                 </div>
             </div>
         </div>
+        <div class="row dap-sep">
+            <div class="col-md-6 dap-bottom dap-left-bottom-menu">
+<button id="max-code" type="button" class="btn btn-secondary">Maximize Code</button>
+<button id="download-code" type="button" class="btn btn-primary">Save Code</button>
+                
+            </div>
+                <div class="col-md-6 dap-bottom dap-right-bottom-menu">
+<button id="snap-out" type="button" class="btn btn-secondary">Maximize Instrument</button>
+<button id="download-instrument" type="button" class="btn btn-primary">Download Instrument</button>
+            </div>
+        </div>
         <script>
+
+$("#max-code").click(function(){
+    
+    $( ".dap-console-right-section" ).toggle();
+    if (isFull == true){
+        isFull = false;
+        $( ".dap-console-left-section" ).css({"width":"50%"});
+        $("#max-code").html("Maximize Code");
+    } else {
+        isFull = true;
+        $("#max-code").html("Restore Split");
+        $( ".dap-console-left-section" ).css({"width":"95%"});
+    }
+});
+
 var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
     lineNumbers: true,
     lineWrapping:true,
     scrollbarStyle:null,
+    matchBrackets:true,
     onChange: function(){console.log("hello");}
 });
 
@@ -214,9 +240,10 @@ $("#snap-out").click(function(){
     if (isFull == true){
         isFull = false;
         $( ".dap-console-right-section" ).css({"width":"50%"});
+        $("#snap-out").html("Maximize Instrument");
     } else {
         isFull = true;
-
+        $("#snap-out").html("Restore Split");
         $( ".dap-console-right-section" ).css({"width":"95%"});
     }
 });
@@ -224,9 +251,14 @@ $("#snap-out").click(function(){
 $(function() {
   });
 
-$("#download").click(function(){
+$("#download-instrument").click(function(){
     var blob = new Blob(["Created on THE DIGITAL AMATI PROJECT. All rights reserved. www.digitalamati.org", $("#output").html(), "<br>Created on the Digital Amati Project."], {type: "text/plain;charset=utf-8"});
     saveAs(blob, "instrument.html");
+
+});
+$("#download-code").click(function(){
+    var blob = new Blob([$("#code").html()], {type: "text/plain;charset=utf-8"});
+    saveAs(blob, "code.scm");
 
 });
 
