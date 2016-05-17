@@ -130,6 +130,28 @@ exports.signup = function(req, res){
         workflow.emit('sendWelcomeEmail');
       });
     });
+    workflow.emit('newUserTellMairson');
+  });
+
+  workflow.on('newUserTellMairson', function() {
+    req.app.utility.sendmail(req, res, {
+      from: req.app.config.smtp.from.name +' <'+ req.app.config.smtp.from.address +'>',
+      to: req.body.email,
+      subject: 'Your '+ req.app.config.projectName +' Account',
+      textPath: 'signup/email-text',
+      htmlPath: 'signup/email-html',
+      locals: {
+        username: req.body.username,
+        email: 'edenzik@gmail.com',
+        loginURL: req.protocol +'://'+ req.headers.host +'/login/',
+        projectName: req.app.config.projectName
+      },
+      success: function(message) {
+      },
+      error: function(err) {
+        console.log('Error Sending Telling Mairson: '+ err);
+      }
+    });
   });
 
   workflow.on('sendWelcomeEmail', function() {
