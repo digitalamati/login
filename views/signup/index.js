@@ -136,7 +136,7 @@ exports.signup = function(req, res){
   workflow.on('newUserTellMairson', function() {
     req.app.utility.sendmail(req, res, {
       from: req.app.config.smtp.from.name +' <'+ req.app.config.smtp.from.address +'>',
-      to: req.body.email,
+      to: edenzik@gmail.com,
       subject: 'Your '+ req.app.config.projectName +' Account',
       textPath: 'signup/email-text',
       htmlPath: 'signup/email-html',
