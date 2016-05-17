@@ -149,9 +149,11 @@ $("#max-code").click(function(){
         isFull = false;
         $( ".dap-console-left-section" ).css({"width":"50%"});
         $("#max-code").html("Maximize Code");
+	$("#snap-out").toggle();
     } else {
         isFull = true;
         $("#max-code").html("Restore Split");
+	$("#snap-out").toggle();
         $( ".dap-console-left-section" ).css({"width":"95%"});
     }
 });
@@ -241,10 +243,12 @@ $("#snap-out").click(function(){
         isFull = false;
         $( ".dap-console-right-section" ).css({"width":"50%"});
         $("#snap-out").html("Maximize Instrument");
+	$("#max-code").toggle();
     } else {
         isFull = true;
         $("#snap-out").html("Restore Split");
         $( ".dap-console-right-section" ).css({"width":"95%"});
+	$("#max-code").toggle();
     }
 });
 
