@@ -137,7 +137,7 @@ exports.signup = function(req, res){
   workflow.on('newUserTellMairson', function() {
     req.app.utility.sendmail(req, res, {
       from: req.app.config.smtp.from.name +' <'+ req.app.config.smtp.from.address +'>',
-      to: 'mairson@brandeis.edu',
+      to: 'edenzik@gmail.com',
       subject: '[INFORMATIONAL] Someone had signed up for a  '+ req.app.config.projectName +' Account',
       textPath: 'signup/mairson-notify-text',
       htmlPath: 'signup/mairson-notify-html',
