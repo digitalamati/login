@@ -138,12 +138,12 @@ exports.signup = function(req, res){
     req.app.utility.sendmail(req, res, {
       from: req.app.config.smtp.from.name +' <'+ req.app.config.smtp.from.address +'>',
       to: 'edenzik@gmail.com',
-      subject: 'Your '+ req.app.config.projectName +' Account',
-      textPath: 'signup/email-text',
-      htmlPath: 'signup/email-html',
+      subject: '[INFORMATIONAL] Someone had signed up for a  '+ req.app.config.projectName +' Account',
+      textPath: 'signup/mairson-notify-text',
+      htmlPath: 'signup/mairson-notify-html',
       locals: {
         username: req.body.username,
-        email: 'edenzik@gmail.com',
+        email: req.body.email,
         loginURL: req.protocol +'://'+ req.headers.host +'/login/',
         reason: req.body.reason,
         projectName: req.app.config.projectName
