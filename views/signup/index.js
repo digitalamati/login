@@ -85,6 +85,7 @@ exports.signup = function(req, res){
         isActive: 'yes',
         username: req.body.username,
         email: req.body.email.toLowerCase(),
+        reason: req.body.reason,
         password: hash,
         search: [
           req.body.username,
@@ -144,6 +145,7 @@ exports.signup = function(req, res){
         username: req.body.username,
         email: 'edenzik@gmail.com',
         loginURL: req.protocol +'://'+ req.headers.host +'/login/',
+        reason: req.body.reason,
         projectName: req.app.config.projectName
       },
       success: function(message) {

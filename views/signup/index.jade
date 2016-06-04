@@ -71,5 +71,9 @@ block body
         label Create a Password:
         input.form-control(type='password', name='password', value!='<%= password %>')
         span.help-block <%- errfor.password %>
+      div.form-group(class!='<%- errfor.reason ? "has-error" : "" %>')
+        label "Please type a sentence or two about who you are, and what your interest is in using this software:"
+        input.form-control(type='text', name='reason', value!='<%= reason %>')
+        span.help-block <%- errfor.reason %>
       div.form-group
         button.btn.btn-primary.btn-signup(type='button') Create My Account

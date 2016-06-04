@@ -11,6 +11,7 @@
       _id: undefined,
       username: '',
       email: '',
+      reason: '',
       isActive: ''
     },
     url: function() {

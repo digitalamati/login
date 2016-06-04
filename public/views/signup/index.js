@@ -12,7 +12,8 @@
       errfor: {},
       username: '',
       email: '',
-      password: ''
+      password: '',
+      reason: ''
     }
   });
 
@@ -48,7 +49,8 @@
       this.model.save({
         username: this.$el.find('[name="username"]').val(),
         email: this.$el.find('[name="email"]').val(),
-        password: this.$el.find('[name="password"]').val()
+        password: this.$el.find('[name="password"]').val(),
+        reason: this.$el.find('[name="reason"]').val()
       },{
         success: function(model, response) {
           if (response.success) {

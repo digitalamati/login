@@ -25,7 +25,7 @@ exports.find = function(req, res, next){
 
   req.app.db.models.User.pagedFind({
     filters: filters,
-    keys: 'username email isActive',
+    keys: 'username email reason isActive',
     limit: req.query.limit,
     page: req.query.page,
     sort: req.query.sort
