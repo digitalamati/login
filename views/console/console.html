@@ -268,7 +268,11 @@ $("#download-code").click(function(){
 });
 
 $("#refresh").click(function(){
-    makeCorsRequest();
+    $('#output').fadeTo("fast",0.5);
+    clearTimeout(timeout);
+    timeout = setTimeout(function(){ 
+        makeCorsRequest();
+    }, 1000);
 
 });
 
