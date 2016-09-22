@@ -138,6 +138,7 @@
                 <div class="col-md-6 dap-bottom dap-right-bottom-menu">
 <button id="snap-out" type="button" class="btn btn-secondary">Maximize Instrument</button>
 <button id="download-instrument" type="button" class="btn btn-primary">Download Instrument</button>
+<button id="refresh" type="button" class="btn btn-secondary">Refresh Instrument</button>
             </div>
         </div>
         <script>
@@ -263,6 +264,11 @@ $("#download-instrument").click(function(){
 $("#download-code").click(function(){
     var blob = new Blob([$("#code").html()], {type: "text/plain;charset=utf-8"});
     saveAs(blob, "code.scm");
+
+});
+
+$("#refresh").click(function(){
+    makeCorsRequest();
 
 });
 
